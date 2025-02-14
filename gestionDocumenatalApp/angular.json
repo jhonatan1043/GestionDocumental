@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gestionDocumenatalApp": {
+    "gestiondocumenatalapp": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "gestionDocumenatalApp:build:production"
+              "buildTarget": "gestiondocumenatalapp:build:production"
             },
             "development": {
-              "buildTarget": "gestionDocumenatalApp:build:development"
+              "buildTarget": "gestiondocumenatalapp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -68,7 +68,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "gestionDocumenatalApp:build"
+            "buildTarget": "gestiondocumenatalapp:build"
           }
         },
         "test": {
@@ -91,5 +91,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "426ab108-e722-4fc2-9993-2a973d70c68b"
   }
 }

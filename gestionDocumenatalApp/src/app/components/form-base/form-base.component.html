@@ -1,0 +1,37 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg space-y-4">
+    <div *ngFor="let campo of fields.campos">
+        <div *ngIf="campo.tipo !== 'array'" class="mb-4">
+            <label [htmlFor]="campo.nombre" class="block text-gray-700 font-medium mb-2">{{ campo.etiqueta }}</label>
+            <input *ngIf="campo.tipo === 'text' || campo.tipo === 'number' || campo.tipo === 'date'"
+                [formControlName]="campo.nombre" [type]="campo.tipo"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select *ngIf="campo.tipo === 'select'" [formControlName]="campo.nombre"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option *ngFor="let opcion of campo.opciones" [value]="opcion">{{ opcion }}</option>
+            </select>
+        </div>
+
+        <div *ngIf="campo.tipo === 'array'" class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">{{ campo.etiqueta }}</label>
+            <div formArrayName="{{ campo.nombre }}" class="space-y-4">
+                <div *ngFor="let item of getFormArray(campo.nombre).controls; let i = index" [formGroupName]="i"
+                    class="bg-gray-100 p-4 rounded-lg shadow-md">
+                    <div *ngFor="let subCampo of campo.campos">
+                        <label class="block text-gray-600 font-medium mb-1">{{ subCampo.etiqueta }}</label>
+                        <input [formControlName]="subCampo.nombre" [type]="subCampo.tipo"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+            </div>
+            <button type="button" (click)="agregarCampoArray(campo.nombre)"
+                class="mt-3 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition-all">
+                ➕ Agregar
+            </button>
+        </div>
+    </div>
+
+    <button type="submit"
+        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-all">
+        🚀 Enviar
+    </button>
+</form>
